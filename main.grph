@@ -1,0 +1,13 @@
+back = (640,480 WHITE)
+shape r = Rectangle(10,10 620,460 RED)
+boolean direction = true
+#while true
+	#if getXForPos[getPosition[r]] >= 20
+		direction = false
+	#elseif getYForPos[getPosition[r]] <= 0
+		direction = true
+	#if direction
+		translate r: 1,0
+	#else
+		translate r: -1,0
+	wait: 10
