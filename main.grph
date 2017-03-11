@@ -1,10 +1,10 @@
 //back = (640,480 WHITE)// DEFAULT
-shape r = Rectangle(10,10 620,460 RED)
+shape r = Square(90,10 460,460 RED)
 shape c = Circle(200,120 240,240 radial[AQUA 0.5,0.5 BLUE 0.5])
 validateAll:
 boolean direction = true
 #while true
-	#if getXForPos[getPosition[r]] >= 20
+	#if getXForPos[getPosition[r]] >= 180
 		direction = false
 	#elseif getXForPos[getPosition[r]] <= 0
 		direction = true
@@ -17,7 +17,6 @@ boolean direction = true
 		translate c: -1,0
 		log[left]
 	wait: 10
-
 
 
 
