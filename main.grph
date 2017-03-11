@@ -2,6 +2,9 @@
 shape r = Square(90,10 460,460 color[0 128 0])
 ORANGE = color[255 175 0]
 shape c = Circle(200,120 240,240 radial[YELLOW 0.5,0.5 ORANGE 0.5])
+color littleBlack = color[0 0 0 0.75]
+shape vertical = Line(320,120 320,360 littleBlack 4F cut)
+shape horizontal = Line(200,240 440,240 littleBlack 4F cut)
 validateAll:
 boolean direction = true
 boolean jump = true
@@ -18,12 +21,20 @@ boolean jump = true
 	#if direction
 		translate r: 1,0
 		translate c: 1,0
+		translate vertical: 1,0
+		translate horizontal: 1,0
 	#else
 		translate r: -1,0
 		translate c: -1,0
+		translate vertical: -1,0
+		translate horizontal: -1,0
 	#if jump
 		translate c: 0,-1
+		translate vertical: 0,-1
+		translate horizontal: 0,-1
 	#else
 		translate c: 0,2
+		translate vertical: 0,2
+		translate horizontal: 0,2
 	wait: 10
 
