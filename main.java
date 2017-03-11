@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 back = new GImage(new Point(640, 480), Color.WHITE);
 GShape r = new GRectangle(10, 10, 620, 460, Color.RED);
 boolean direction = true;
