@@ -1,0 +1,25 @@
+shape c = Circle(0,0 50,50 RED)
+validateAll:
+boolean backx = false
+boolean backy = false
+#while true
+	// Changing direction
+	#if getXForPos[getPosition[c]] < 1
+		backx = false
+	#elseif getXForPos[getPosition[c]] > 590
+		backx = true
+	#if getYForPos[getPosition[c]] < 1
+		backy = false
+	#elseif getYForPos[getPosition[c]] > 430
+		backy = true
+	// Translation
+	#if backx
+		translate c: -1,0
+	#else
+		translate c: 1,0
+	#if backy
+		translate c: 0,-1
+	#else
+		translate c: 0,1
+	wait: 3
+
