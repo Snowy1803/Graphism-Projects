@@ -1,22 +1,29 @@
 //back = (640,480 WHITE)// DEFAULT
-shape r = Square(90,10 460,460 RED)
-shape c = Circle(200,120 240,240 radial[AQUA 0.5,0.5 BLUE 0.5])
+shape r = Square(90,10 460,460 color[0 128 0])
+ORANGE = color[255 175 0]
+shape c = Circle(200,120 240,240 radial[YELLOW 0.5,0.5 ORANGE 0.5])
 validateAll:
 boolean direction = true
+boolean jump = true
 #while true
 	#if getXForPos[getPosition[r]] >= 180
 		direction = false
 	#elseif getXForPos[getPosition[r]] <= 0
 		direction = true
+	#if getYForPos[getPosition[c]] <= 120
+		jump = false
+	#elseif getYForPos[getPosition[c]] >= 150
+		jump = true
+	
 	#if direction
 		translate r: 1,0
 		translate c: 1,0
-		log[right]
 	#else
 		translate r: -1,0
 		translate c: -1,0
-		log[left]
+	#if jump
+		translate c: 0,-1
+	#else
+		translate c: 0,2
 	wait: 10
-
-
 
