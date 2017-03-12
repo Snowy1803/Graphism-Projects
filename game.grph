@@ -17,6 +17,7 @@ pos tmpPos = 0,0
 integer wave = 1
 integer time = 0
 #while true
+	// Move ball
 	setPosition ball: currentPos
 	#if getXForPos[getMousePos[this]] < 25 + getXForPos[currentPos]
 		translate ball: -1,0
@@ -27,12 +28,24 @@ integer time = 0
 	#elseif getYForPos[getMousePos[this]] > 25 + getYForPos[currentPos]
 		translate ball: 0,1
 	currentPos = getPosition[ball]
+	// Corrects position of the ball if outside of 
+	#if getXForPos[currentPos] < 0
+		currentPos = createPos[0 getYForPos[getPosition[ball]]]
+	#elseif getXForPos[currentPos] > 590
+		currentPos = createPos[590 getYForPos[getPosition[ball]]]
+	#if getYForPos[currentPos] < 0
+		currentPos = createPos[getXForPos[getPosition[ball]] 0]
+	#elseif getYForPos[currentPos] > 430
+		currentPos = createPos[getXForPos[getPosition[ball]] 430]
+	setPosition ball: currentPos
+	// Spawns missiles
 	#if randomInteger[round[[300 / wave]]] <= 0
 		obs = Rectangle(toString[Missile" obsCount] 630,0 30,10 color[128 128 128])
 		tmpPos = createPos[630 randomInteger[470]]
 		setPosition obs: tmpPos
 		validate: obs
 		obsCount = round[[obsCount + 1]]
+	// Move missiles
 	currentObstacle = 0
 	#while currentObstacle < obsCount
 		obs = getShapeNamed[this toString[Missile" currentObstacle]]
