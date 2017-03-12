@@ -14,18 +14,20 @@ integer obsCount = 0
 integer currentObstacle = 0
 shape obs = Rectangle(0,0 0,0 BLACK)
 pos tmpPos = 0,0
+integer wave = 1
+integer time = 0
 #while true
 	setPosition ball: currentPos
-	#if getXForPos[getMousePos[this]] < getXForPos[currentPos]
+	#if getXForPos[getMousePos[this]] < 25 + getXForPos[currentPos]
 		translate ball: -1,0
-	#elseif getXForPos[getMousePos[this]] > getXForPos[currentPos]
+	#elseif getXForPos[getMousePos[this]] > 25 + getXForPos[currentPos]
 		translate ball: 1,0
-	#if getYForPos[getMousePos[this]] < getYForPos[currentPos]
+	#if getYForPos[getMousePos[this]] < 25 + getYForPos[currentPos]
 		translate ball: 0,-1
-	#elseif getYForPos[getMousePos[this]] > getYForPos[currentPos]
+	#elseif getYForPos[getMousePos[this]] > 25 + getYForPos[currentPos]
 		translate ball: 0,1
 	currentPos = getPosition[ball]
-	#if randomInteger[500] <= 0
+	#if randomInteger[round[[300 / wave]]] <= 0
 		obs = Rectangle(toString[Missile" obsCount] 630,0 30,10 color[128 128 128])
 		tmpPos = createPos[630 randomInteger[470]]
 		setPosition obs: tmpPos
@@ -35,16 +37,32 @@ pos tmpPos = 0,0
 	#while currentObstacle < obsCount
 		obs = getShapeNamed[this toString[Missile" currentObstacle]]
 		translate obs: -1,0
-		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 55]
+		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 30]
 			unvalidate: presentation
 			unvalidate: ball
 			back = (640,480 RED)
 			shape go = Text([Game over"] 197,100 0 50 WHITE)
 			validate: go
+			string s = toString[You" survived" [divide[[time * wave] 500]] seconds"]
+			shape survTime = Text(s 100,160 0 30 WHITE)
+			validate: survTime
 			end:
 		currentObstacle = round[[currentObstacle + 1]]
 	//
-	//
+	// Waves
+	#if time >= 15000
+		wave = round[[wave + 1]]
+		currentObstacle = 0
+		#while currentObstacle < obsCount
+			obs = getShapeNamed[this toString[Missile" currentObstacle]]
+			unvalidate: obs
+			currentObstacle = round[[currentObstacle + 1]]
+		//
+		//
+		setName presentation: toString[Wave" wave]
+		obsCount = 0
+		time = 0
 	wait: 2
+	time = round[[time + 1]]
  //
  //
