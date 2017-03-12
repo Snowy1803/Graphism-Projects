@@ -63,7 +63,7 @@ integer time = 0
 		currentObstacle = round[[currentObstacle + 1]]
 	//
 	// Waves
-	#if time >= 15000
+	#if time >= 10000
 		wave = round[[wave + 1]]
 		currentObstacle = 0
 		#while currentObstacle < obsCount
