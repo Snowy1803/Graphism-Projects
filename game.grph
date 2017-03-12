@@ -1,0 +1,31 @@
+#import math
+//shape beginning = Text([Select this text and click 'up' to begin"] 78,200 0 30 BLACK)
+//validateAll:
+//#while getYForPos[getPosition[beginning]] == 166F // Awaits input
+//back = (640,480 WHITE) // RESET
+shape presentation = Text([Avoid obstacles"] 217,100 0 30 BLACK)
+validate: presentation
+shape ball = Circle(150,400 50,50 ORANGE)
+shape test = Rectangle(150,400 0,0 BLACK)
+validate: ball
+pos currentPos = 150,400
+integer i = 0
+shape obs = Rectangle(0,0 0,0 BLACK)
+#while true
+	#if getXForPos[currentPos] < getXForPos[getPosition[ball]]
+		setPosition test: currentPos
+		translate test: 1,0
+	#elseif getXForPos[currentPos] > getXForPos[getPosition[ball]]
+		setPosition test: currentPos
+		translate test: -1,0
+	#if getYForPos[currentPos] < getYForPos[getPosition[ball]]
+		setPosition test: currentPos
+		translate test: 0,1
+	#elseif getYForPos[currentPos] > getYForPos[getPosition[ball]]
+		setPosition test: currentPos
+		translate test: 0,-1
+	currentPos = getPosition[test]
+	setPosition ball: currentPos
+	wait: 2
+//
+//
