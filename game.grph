@@ -30,13 +30,13 @@ integer time = 0
 	currentPos = getPosition[ball]
 	// Corrects position of the ball if outside of 
 	#if getXForPos[currentPos] < 0
-		currentPos = createPos[0 getYForPos[getPosition[ball]]]
+		currentPos = createPos[0 getYForPos[currentPos]]
 	#elseif getXForPos[currentPos] > 590
-		currentPos = createPos[590 getYForPos[getPosition[ball]]]
+		currentPos = createPos[590 getYForPos[currentPos]]
 	#if getYForPos[currentPos] < 0
-		currentPos = createPos[getXForPos[getPosition[ball]] 0]
+		currentPos = createPos[getXForPos[currentPos] 0]
 	#elseif getYForPos[currentPos] > 430
-		currentPos = createPos[getXForPos[getPosition[ball]] 430]
+		currentPos = createPos[getXForPos[currentPos] 430]
 	setPosition ball: currentPos
 	// Spawns missiles
 	#if randomInteger[round[[300 / wave]]] <= 0
