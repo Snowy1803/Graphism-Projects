@@ -1,31 +1,50 @@
 #import math
+#import random
+#import stdio
 //shape beginning = Text([Select this text and click 'up' to begin"] 78,200 0 30 BLACK)
 //validateAll:
 //#while getYForPos[getPosition[beginning]] == 166F // Awaits input
 //back = (640,480 WHITE) // RESET
-shape presentation = Text([Avoid obstacles"] 217,100 0 30 BLACK)
+shape presentation = Text([Avoid missiles"] 226,100 0 30 BLACK)
 validate: presentation
 shape ball = Circle(150,400 50,50 ORANGE)
-shape test = Rectangle(150,400 0,0 BLACK)
 validate: ball
 pos currentPos = 150,400
-integer i = 0
+integer obsCount = 0
+integer currentObstacle = 0
 shape obs = Rectangle(0,0 0,0 BLACK)
+pos tmpPos = 0,0
 #while true
-	#if getXForPos[currentPos] < getXForPos[getPosition[ball]]
-		setPosition test: currentPos
-		translate test: 1,0
-	#elseif getXForPos[currentPos] > getXForPos[getPosition[ball]]
-		setPosition test: currentPos
-		translate test: -1,0
-	#if getYForPos[currentPos] < getYForPos[getPosition[ball]]
-		setPosition test: currentPos
-		translate test: 0,1
-	#elseif getYForPos[currentPos] > getYForPos[getPosition[ball]]
-		setPosition test: currentPos
-		translate test: 0,-1
-	currentPos = getPosition[test]
 	setPosition ball: currentPos
+	#if getXForPos[getMousePos[this]] < getXForPos[currentPos]
+		translate ball: -1,0
+	#elseif getXForPos[getMousePos[this]] > getXForPos[currentPos]
+		translate ball: 1,0
+	#if getYForPos[getMousePos[this]] < getYForPos[currentPos]
+		translate ball: 0,-1
+	#elseif getYForPos[getMousePos[this]] > getYForPos[currentPos]
+		translate ball: 0,1
+	currentPos = getPosition[ball]
+	#if randomInteger[500] <= 0
+		obs = Rectangle(toString[Missile" obsCount] 630,0 30,10 color[128 128 128])
+		tmpPos = createPos[630 randomInteger[470]]
+		setPosition obs: tmpPos
+		validate: obs
+		obsCount = round[[obsCount + 1]]
+	currentObstacle = 0
+	#while currentObstacle < obsCount
+		obs = getShapeNamed[this toString[Missile" currentObstacle]]
+		translate obs: -1,0
+		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 55]
+			unvalidate: presentation
+			unvalidate: ball
+			back = (640,480 RED)
+			shape go = Text([Game over"] 197,100 0 50 WHITE)
+			validate: go
+			end:
+		currentObstacle = round[[currentObstacle + 1]]
+	//
+	//
 	wait: 2
-//
-//
+ //
+ //
