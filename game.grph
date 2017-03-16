@@ -5,7 +5,7 @@
 //validateAll:
 //#while getYForPos[getPosition[beginning]] == 166F // Awaits input
 //back = (640,480 WHITE) // RESET
-shape presentation = Text([Avoid missiles"] 226,100 0 30 BLACK)
+shape presentation = Text(["Avoid missiles"] 226,100 0 30 BLACK)
 validate: presentation
 shape ball = Circle(150,400 50,50 ORANGE)
 validate: ball
@@ -28,7 +28,7 @@ integer time = 0
 	#elseif getYForPos[getMousePos[this]] > 25 + getYForPos[currentPos]
 		translate ball: 0,1
 	currentPos = getPosition[ball]
-	// Corrects position of the ball if outside of 
+	// Corrects position of the ball if outside of the frame
 	#if getXForPos[currentPos] < 0
 		currentPos = createPos[0 getYForPos[currentPos]]
 	#elseif getXForPos[currentPos] > 590
@@ -40,7 +40,7 @@ integer time = 0
 	setPosition ball: currentPos
 	// Spawns missiles
 	#if randomInteger[round[[300 / wave]]] <= 0
-		obs = Rectangle(toString[Missile" obsCount] 630,0 30,10 color[128 128 128])
+		obs = Rectangle(toString["Missile" obsCount] 630,0 30,10 color[128 128 128])
 		tmpPos = createPos[630 randomInteger[470]]
 		setPosition obs: tmpPos
 		validate: obs
@@ -48,17 +48,25 @@ integer time = 0
 	// Move missiles
 	currentObstacle = 0
 	#while currentObstacle < obsCount
-		obs = getShapeNamed[this toString[Missile" currentObstacle]]
+		obs = getShapeNamed[this toString["Missile" currentObstacle]]
 		translate obs: -1,0
 		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 30]
 			unvalidate: presentation
 			unvalidate: ball
 			back = (640,480 RED)
-			shape go = Text([Game over"] 197,100 0 50 WHITE)
+			shape go = Text(["Game over"] 197,100 0 50 WHITE)
 			validate: go
-			string s = toString[You" survived" [divide[[time * wave] 500]] seconds"]
+			string s = toString["You" "survived" [divide[getTimeInMillisSinceLoad[this] 1000]] "seconds"]
 			shape survTime = Text(s 100,160 0 30 WHITE)
+			setHCentered: survTime
 			validate: survTime
+			#if wave > 2
+				s = toString["You" "survived" [wave - 1] "waves"]
+			#else
+				s = toString["You" "survived" [wave - 1] "wave"]
+			shape survWave = Text(s 100,220 0 30 WHITE)
+			setHCentered: survWave
+			validate: survWave
 			end:
 		currentObstacle = round[[currentObstacle + 1]]
 	//
@@ -67,12 +75,13 @@ integer time = 0
 		wave = round[[wave + 1]]
 		currentObstacle = 0
 		#while currentObstacle < obsCount
-			obs = getShapeNamed[this toString[Missile" currentObstacle]]
+			obs = getShapeNamed[this toString["Missile" currentObstacle]]
 			unvalidate: obs
 			currentObstacle = round[[currentObstacle + 1]]
 		//
 		//
-		setName presentation: toString[Wave" wave]
+		setName presentation: toString["Wave" wave]
+		setHCentered: presentation
 		obsCount = 0
 		time = 0
 	wait: 2
