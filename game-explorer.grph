@@ -47,7 +47,7 @@ integer nextObstacle = 1000
 		//
 	#if nextObstacle <= 0
 		obsCount = round[obsCount+1]
-		obs = Rectangle(toString["Obstacle" obsCount] 640,350 50,50 grassc)
+		obs = Polygon(toString["Obstacle" obsCount] grassc 640,400 660,350 680,400)
 		validate: obs
 		nextObstacle = round[500+randomInteger[2000]]
 	#else
