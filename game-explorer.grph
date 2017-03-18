@@ -26,30 +26,35 @@ shape obs = ball
 integer obsCount = 0
 /// Current handling obstacle number
 integer currentObstacle = 0
+/// Time before next obstacle spawns
+integer nextObstacle = 1000
 #while true
 	#if isKeyPressedWithKeyCode[this 32]
 		#if jumping <= 0
-			jumping = 200
+			jumping = 250
 		//
-	#if jumping > 125
+	#if jumping > 150
 		translate ball: 0,-1
 		jumping = round[[jumping - 1]]
-	#elseif jumping > 75
+	#elseif jumping > 100
 		jumping = round[[jumping - 1]]
 	#elseif getYForPos[getPosition[ball]] < 325 // TODO change to platforms
 		translate ball: 0,1
 		#if jumping > 0
 			jumping = round[[jumping - 1]]
 		//
-	#if randomInteger[2000] <= 0
+	#if nextObstacle <= 0
 		obsCount = round[obsCount+1]
 		obs = Rectangle(toString["Obstacle" obsCount] 640,350 50,50 grassc)
 		validate: obs
+		nextObstacle = round[500+randomInteger[2000]]
+	#else
+		nextObstacle = round[nextObstacle-1]
 	currentObstacle = 1
 	#while currentObstacle <= obsCount
 		obs = getShapeNamed[this toString["Obstacle" currentObstacle]]
 		translate obs: -1,0
-		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 50]
+		#if intersects[ball obs]
 			unvalidate: grass
 			unvalidate: ball
 			back = (640,480 RED)
