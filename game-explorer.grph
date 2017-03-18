@@ -1,5 +1,6 @@
 #import stdio
 #import math
+#import random
 // Menu
 //shape game = back
 //back = (640,480 WHITE)
@@ -9,24 +10,51 @@
 //#while start != getSelectedShape[this]
 // Game
 back = (640,480 AQUA)
-shape grass = Rect(0,400 640,80 color[0 128 0])
+color grassc = color[0 128 0]
+shape grass = Rect(0,400 640,80 grassc)
 validate: grass
 shape ball = Circle(90,325 75,75 ORANGE)
 validate: ball
 integer jumping = 0
+shape obs = ball
+integer obsCount = 0
+integer currentObstacle = 0
 #while true
 	#if isKeyPressedWithKeyCode[this 32]
 		#if jumping <= 0
-			jumping = 150
+			jumping = 200
 		//
-	#if jumping > 75
+	#if jumping > 125
 		translate ball: 0,-1
+		jumping = round[[jumping - 1]]
+	#elseif jumping > 75
 		jumping = round[[jumping - 1]]
 	#elseif getYForPos[getPosition[ball]] < 325 // TODO change to platforms
 		translate ball: 0,1
 		#if jumping > 0
 			jumping = round[[jumping - 1]]
 		//
+	#if randomInteger[2000] <= 0
+		obsCount = round[obsCount+1]
+		obs = Rectangle(toString["Obstacle" obsCount] 640,350 50,50 grassc)
+		validate: obs
+	currentObstacle = 1
+	#while currentObstacle <= obsCount
+		obs = getShapeNamed[this toString["Obstacle" currentObstacle]]
+		translate obs: -1,0
+		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 50]
+			unvalidate: grass
+			unvalidate: ball
+			back = (640,480 RED)
+			shape go = Text(["Game over"] 197,100 0 50 WHITE)
+			validate: go
+			string s = toString["You" "survived" [divide[getTimeInMillisSinceLoad[this] 1000]] "seconds"]
+			shape survTime = Text(s 100,160 0 30 WHITE)
+			setHCentered: survTime
+			validate: survTime
+			end:
+		currentObstacle = round[[currentObstacle + 1]]
+	//
 	wait: 1
  //
  //
