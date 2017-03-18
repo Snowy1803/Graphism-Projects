@@ -52,6 +52,10 @@ integer currentObstacle = 0
 			shape survTime = Text(s 100,160 0 30 WHITE)
 			setHCentered: survTime
 			validate: survTime
+			s = toString["You" "survived" "to" [currentObstacle - 1] "obstacles"]
+			shape survObs = Text(s 100,210 0 30 WHITE)
+			setHCentered: survObs
+			validate: survObs
 			end:
 		currentObstacle = round[[currentObstacle + 1]]
 	//
