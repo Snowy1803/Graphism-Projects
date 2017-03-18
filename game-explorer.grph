@@ -1,0 +1,32 @@
+#import stdio
+#import math
+// Menu
+//shape game = back
+//back = (640,480 WHITE)
+//shape start = Text(["Start"] 100,100 0 40 BLUE)
+//setHCentered: start
+//validate: start
+//#while start != getSelectedShape[this]
+// Game
+back = (640,480 AQUA)
+shape grass = Rect(0,400 640,80 color[0 128 0])
+validate: grass
+shape ball = Circle(90,325 75,75 ORANGE)
+validate: ball
+integer jumping = 0
+#while true
+	#if isKeyPressedWithKeyCode[this 32]
+		#if jumping <= 0
+			jumping = 150
+		//
+	#if jumping > 75
+		translate ball: 0,-1
+		jumping = round[[jumping - 1]]
+	#elseif getYForPos[getPosition[ball]] < 325 // TODO change to platforms
+		translate ball: 0,1
+		#if jumping > 0
+			jumping = round[[jumping - 1]]
+		//
+	wait: 1
+ //
+ //
