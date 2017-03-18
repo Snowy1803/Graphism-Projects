@@ -16,7 +16,7 @@ color grassc = color[0 128 0]
 shape grass = Rect(0,400 640,80 grassc)
 validate: grass
 /// The ball
-shape ball = Circle(90,325 75,75 ORANGE)
+shape ball = Circle(90,325 75,75 radial[YELLOW 0.5,0.5 ORANGE 0.5])
 validate: ball
 /// Indicates the ball's current jumping status
 integer jumping = 0
