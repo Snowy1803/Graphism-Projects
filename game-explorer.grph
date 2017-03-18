@@ -24,6 +24,8 @@ integer jumping = 0
 shape obs = ball
 /// Number of obstacles
 integer obsCount = 0
+/// Number of obstacles that has been removed when they became invisible
+integer removedObstacles = 0
 /// Current handling obstacle number
 integer currentObstacle = 0
 /// Time before next obstacle spawns
@@ -50,11 +52,14 @@ integer nextObstacle = 1000
 		nextObstacle = round[500+randomInteger[2000]]
 	#else
 		nextObstacle = round[nextObstacle-1]
-	currentObstacle = 1
+	currentObstacle = round[removedObstacles+1]
 	#while currentObstacle <= obsCount
 		obs = getShapeNamed[this toString["Obstacle" currentObstacle]]
 		translate obs: -1,0
-		#if intersects[ball obs]
+		#if getXForPos[getPosition[obs]] < 0 - 50
+			unvalidate: obs
+			removedObstacles = currentObstacle
+		#elseif intersects[ball obs]
 			unvalidate: grass
 			unvalidate: ball
 			back = (640,480 RED)
