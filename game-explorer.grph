@@ -71,6 +71,7 @@ integer nextObstacle = 1000
 			end:
 		currentObstacle = round[[currentObstacle + 1]]
 	//
+	rotate ball: 1°
 	wait: 1
  //
  //
