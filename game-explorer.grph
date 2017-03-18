@@ -10,14 +10,21 @@
 //#while start != getSelectedShape[this]
 // Game
 back = (640,480 AQUA)
+/// The color of the grass
 color grassc = color[0 128 0]
+/// The grass rectangle, at the bottom
 shape grass = Rect(0,400 640,80 grassc)
 validate: grass
+/// The ball
 shape ball = Circle(90,325 75,75 ORANGE)
 validate: ball
+/// Indicates the ball's current jumping status
 integer jumping = 0
+/// Current handling obstacle, ball by default because null doesn't exists
 shape obs = ball
+/// Number of obstacles
 integer obsCount = 0
+/// Current handling obstacle number
 integer currentObstacle = 0
 #while true
 	#if isKeyPressedWithKeyCode[this 32]
