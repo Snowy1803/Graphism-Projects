@@ -1,0 +1,7 @@
+// Shapes
+shape rect = Rectangle(0,0 150,150 BLACK)
+shape poly = Polygon(RED 45,60 45,85 110,85 110,60 95,60 95,75 60,75 60,60)
+// Regroup
+shape group = Group(rect poly)
+// And validate
+validate: group
