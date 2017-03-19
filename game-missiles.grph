@@ -39,12 +39,12 @@ integer time = 0
 		currentPos = createPos[getXForPos[currentPos] 430]
 	setPosition ball: currentPos
 	// Spawns missiles
-	#if randomInteger[round[[300 / wave]]] <= 0
+	#if randomInteger[[300 / wave]] <= 0
 		obs = Rectangle(toString["Missile" obsCount] 630,0 30,10 color[128 128 128])
 		tmpPos = createPos[630 randomInteger[470]]
 		setPosition obs: tmpPos
 		validate: obs
-		obsCount = round[[obsCount + 1]]
+		obsCount = obsCount + 1
 	// Move missiles
 	currentObstacle = 0
 	#while currentObstacle < obsCount
@@ -68,16 +68,16 @@ integer time = 0
 			setHCentered: survWave
 			validate: survWave
 			end:
-		currentObstacle = round[[currentObstacle + 1]]
+		currentObstacle = currentObstacle + 1
 	//
 	// Waves
 	#if time >= 10000
-		wave = round[[wave + 1]]
+		wave = wave + 1
 		currentObstacle = 0
 		#while currentObstacle < obsCount
 			obs = getShapeNamed[this toString["Missile" currentObstacle]]
 			unvalidate: obs
-			currentObstacle = round[[currentObstacle + 1]]
+			currentObstacle = currentObstacle + 1
 		//
 		//
 		setName presentation: toString["Wave" wave]
@@ -85,6 +85,6 @@ integer time = 0
 		obsCount = 0
 		time = 0
 	wait: 2
-	time = round[[time + 1]]
+	time = time + 1
  //
  //

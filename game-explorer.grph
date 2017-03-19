@@ -37,22 +37,22 @@ integer nextObstacle = 1000
 		//
 	#if jumping > 150
 		translate ball: 0,-1
-		jumping = round[[jumping - 1]]
+		jumping = jumping - 1
 	#elseif jumping > 100
-		jumping = round[[jumping - 1]]
+		jumping = jumping - 1
 	#elseif getYForPos[getPosition[ball]] < 325 // TODO change to platforms
 		translate ball: 0,1
 		#if jumping > 0
-			jumping = round[[jumping - 1]]
+			jumping = jumping - 1
 		//
 	#if nextObstacle <= 0
-		obsCount = round[obsCount+1]
+		obsCount = obsCount + 1
 		obs = Polygon(toString["Obstacle" obsCount] grassc 640,400 660,350 680,400)
 		validate: obs
-		nextObstacle = round[300+randomInteger[2000]]
+		nextObstacle = 300+randomInteger[2000]
 	#else
-		nextObstacle = round[nextObstacle-1]
-	currentObstacle = round[removedObstacles+1]
+		nextObstacle = nextObstacle - 1
+	currentObstacle = removedObstacles + 1
 	#while currentObstacle <= obsCount
 		obs = getShapeNamed[this toString["Obstacle" currentObstacle]]
 		translate obs: -1,0
@@ -74,7 +74,7 @@ integer nextObstacle = 1000
 			setHCentered: survObs
 			validate: survObs
 			end:
-		currentObstacle = round[[currentObstacle + 1]]
+		currentObstacle = currentObstacle + 1
 	//
 	rotate ball: 1°
 	wait: 1
