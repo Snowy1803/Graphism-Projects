@@ -31,10 +31,8 @@ integer currentObstacle = 0
 /// Time before next obstacle spawns
 integer nextObstacle = 1000
 #while true
-	#if isKeyPressedWithKeyCode[this 32]
-		#if jumping <= 0
-			jumping = 250
-		//
+	#if isKeyPressedWithKeyCode[this 32] && jumping <= 0
+		jumping = 250
 	#if jumping > 150
 		translate ball: 0,-1
 		jumping -= 1
