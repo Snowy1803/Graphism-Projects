@@ -1,0 +1,10 @@
+#import reflect
+shape text = Text(["Set the name of the shape to spawn and move this text."] 0,200 0 20 BLACK)
+setHCentered: text
+pos initial = getPosition[text]
+validate: text
+#while getPosition[text] == initial // Waitfor
+// Works only with rects and circles. Add some parameters for compability with others. 
+// Reflect calls doesn't support varargs (Like in polygons).
+validate: callConstructor[getName[text] "name" "Creation" "location" 100,100 "size" 50,50 "paint" BLUE]
+//
