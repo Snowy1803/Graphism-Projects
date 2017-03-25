@@ -1,0 +1,5 @@
+shape one = Rectangle(20,20 50,50 GREEN)
+shape two = Rectangle(50,50 50,50 RED)
+shape intersect = clippedShape[one two]
+setPaint intersect: color[255 255 0]
+validateAll:
