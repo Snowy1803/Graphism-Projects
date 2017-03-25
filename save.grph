@@ -1,0 +1,12 @@
+#import stdio
+file f = 'out.png'
+shape text = Text("Save" 0,0 0 30 BLACK)
+setBottomAligned: text
+setRightAligned: text
+validate: text
+#while true
+	#if text == getSelectedShape[this]
+		writeInFile f: getPNGFromCurrentImage[this] "ISO-8859-1"
+	wait: 10
+ //
+ //
