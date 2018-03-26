@@ -12,6 +12,7 @@ validate: ball
 pos currentPos = 150,400
 integer obsCount = 0
 integer currentObstacle = 0
+integer minObs = 0
 shape obs = Rectangle(0,0 0,0 BLACK)
 pos tmpPos = 0,0
 integer wave = 1
@@ -46,10 +47,13 @@ integer time = 0
 		validate: obs
 		obsCount += 1
 	// Move missiles
-	currentObstacle = 0
+	currentObstacle = minObs
 	#while currentObstacle < obsCount
 		obs = getShapeNamed[this toString["Missile" currentObstacle]]
 		translate obs: -1,0
+		#if getXForPos[getPosition[obs]] < 0 - 30
+			unvalidate: obs
+			minObs += 1
 		#if posAround[getCenterPoint[ball] getCenterPoint[obs] 30]
 			unvalidate: presentation
 			unvalidate: ball
@@ -73,7 +77,7 @@ integer time = 0
 	// Waves
 	#if time >= 10000
 		wave = wave + 1
-		currentObstacle = 0
+		currentObstacle = minObs
 		#while currentObstacle < obsCount
 			obs = getShapeNamed[this toString["Missile" currentObstacle]]
 			unvalidate: obs
@@ -83,6 +87,7 @@ integer time = 0
 		setName presentation: toString["Wave" wave]
 		setHCentered: presentation
 		obsCount = 0
+		minObs = 0
 		time = 0
 	wait: 2
 	time += 1
