@@ -1,0 +1,93 @@
+#requires GRPH 1.5
+#import stdio
+// This game was inspired from Color Switch's Circular game mode
+back = (500,500 color[10 10 10])
+shape outline = Circle("Outline" 10,10 480,480 color[128 128 128] 5F rounded {15,20})
+validate: outline
+/// The ball we are playing
+shape ball = Polygon("Cursor" RED 470,250 500,240 495,250 500,260)
+validate: ball
+shape center = Circle("Center" 240,240 20,20 WHITE)
+shape red = Path(["Red path"] RED)
+moveTo red: 250,250
+lineTo red: 150,150
+quadTo red: 60,250 150,350
+closePath red:
+shape green = Path(["Green path"] GREEN)
+moveTo green: 250,250
+lineTo green: 150,150
+quadTo green: 250,60 350,150
+closePath green:
+shape yellow = Path(["Yellow path"] YELLOW)
+moveTo yellow: 250,250
+lineTo yellow: 350,350
+quadTo yellow: 250,430 150,350
+closePath yellow:
+shape blue = Path(["Blue path"] BLUE)
+moveTo blue: 250,250
+lineTo blue: 350,350
+quadTo blue: 430,250 350,150
+closePath blue:
+shape group = Group(red green yellow blue center)
+setRotationCenter group: 250,250
+validate: group
+integer sending = 0
+integer progress = 0
+#while true
+	rotate group: 5°
+	#if isKeyPressedWithKeyCode[this 32] && sending == 0
+		sending = 1
+		translate ball: -1,0
+	#if sending >= 1
+		sending += 5
+		translate ball: -5,0
+		#if intersectsGrouped[this ball red] && progress <= 0
+			#if getPaint[ball] == RED
+				translate ball: createPos[sending 0]
+				sending = 0
+				progress += 1
+				removeFromGroup group: red
+				setPaint ball: GREEN
+			#else
+				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
+				end:
+			//
+		#elseif intersectsGrouped[this ball green] && progress <= 1
+			#if getPaint[ball] == GREEN
+				translate ball: createPos[sending 0]
+				sending = 0
+				progress += 1
+				removeFromGroup group: green
+				setPaint ball: BLUE
+			#else
+				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
+				end:
+			//
+		#elseif intersectsGrouped[this ball blue] && progress <= 2
+			#if getPaint[ball] == BLUE
+				translate ball: createPos[sending 0]
+				sending = 0
+				progress += 1
+				removeFromGroup group: blue
+				setPaint ball: YELLOW
+			#else
+				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
+				end:
+			//
+		#elseif intersectsGrouped[this ball yellow] && progress <= 3
+			#if getPaint[ball] == YELLOW
+				translate ball: createPos[sending 0]
+				sending = 0 
+				removeFromGroup group: yellow
+				validate: Text(["You won!"] 58,300 0 30 WHITE)
+				end:
+			#else
+				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
+				end:
+			//
+		#elseif intersects[ball center]
+			validate: Text(["You touched the center!"] 58,300 0 30 WHITE)
+			end:
+	wait: 100
+ //
+ //
