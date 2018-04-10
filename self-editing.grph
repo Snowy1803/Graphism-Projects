@@ -1,3 +1,2 @@
-#requires GRPH 1.5
-#import stdio
-writeInFile this: "validate: Rect(0,0 100,100 RED)" "UTF-8"
+
+validate: Rect(0,0 100,100 RED)
