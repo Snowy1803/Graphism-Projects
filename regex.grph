@@ -1,0 +1,19 @@
+#requires GRPH 1.6
+#import strutils
+#import random
+#import stdio
+/// This shape's text will change every two seconds.
+/// It's vowels will be replaced by other vowels randomly choosen.
+Text input = Text("Hello, I'm being searched and replaced." 30,30 0 20 BLACK)
+validate: input
+#while true
+	integer time = getTimeInMillisSinceLoad[this]
+	string subject = getName[input]
+	regexMatchBegin subject: "[aeiou]" regexMatchFlags["i"]
+	#while regexMatchFind[subject]
+		regexMatchReplace subject: substring[shuffleString["aeiou"] 0 1]
+	setName input: regexMatchReplaceResult[subject]
+	regexMatchEnd subject:
+	log[[getTimeInMillisSinceLoad[this] - time]]
+	wait: 2000
+ //
