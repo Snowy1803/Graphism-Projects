@@ -6,7 +6,8 @@ setRightAligned: text
 validate: text
 #while true
 	#if text == getSelectedShape[this]
-		writeInFile f: getPNGFromCurrentImage[this] "ISO-8859-1"
+		writeImageInFile f: createCurrentImage[this] "png"
+		//GRPH < 1.6: writeInFile f: getPNGFromCurrentImage[this] "ISO-8859-1"
 	wait: 10
  //
  //
