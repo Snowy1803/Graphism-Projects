@@ -1,0 +1,23 @@
+#import reflect
+#requires GRPH 1.6
+string $1 = "One"
+string $2 = "Two"
+string $3 = "Three"
+string $4 = "Four"
+string $5 = "Five"
+string $6 = "Six"
+string $7 = "Seven"
+string $8 = "Eight"
+string $9 = "Nine"
+string $0 = "Zero"
+Text t = Text("Replace with a digit to get it as a text." 30,100 font[20 2] BLACK)
+Text v = Text("" 30,150 font[20] BLACK)
+validate: t
+validate: v
+#while true
+	#if isVarDeclared[concat["$" getName[t]]]
+		setName v: toString[getVarValue[concat["$" getName[t]]]]
+	#else
+		setName v: "Not a digit"
+	wait: 100
+//
