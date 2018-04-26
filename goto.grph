@@ -1,0 +1,14 @@
+#if false
+	log["Something impossible happened!"]
+	#goto 5
+	#if false
+		log["Unless #goto was used."]
+#else
+	#goto 2
+integer i = 0
+#while true
+	#while i < 0
+		log["One" i]
+		i += 1
+	#else
+		log["Nope"]

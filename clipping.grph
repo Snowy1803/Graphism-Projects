@@ -11,5 +11,6 @@ validateAll:
 	x = 25 - getXForPos[getMousePos[this]]
 	y = 25 - getYForPos[getMousePos[this]]
 	setPosition two: createPos[0-x 0-y]
+	wait: 15
  //
  //

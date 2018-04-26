@@ -1,7 +1,6 @@
 //back = (640,480 WHITE)// DEFAULT
 shape r = Square(90,10 460,460 color[0 128 0])
-ORANGE = color[255 175 0]
-shape c = Circle(200,120 240,240 radial[YELLOW 0.5,0.5 ORANGE 0.5])
+shape c = Circle(200,120 240,240 radial[YELLOW 0.5,0.5 color[255 175 0] 0.5])
 color littleBlack = color[0 0 0 0.75]
 shape vertical = Line(320,120 320,360 littleBlack 4F cut)
 shape horizontal = Line(200,240 440,240 littleBlack 4F cut)
@@ -37,4 +36,4 @@ boolean jump = true
 		translate vertical: 0,2
 		translate horizontal: 0,2
 	wait: 10
-
+//
