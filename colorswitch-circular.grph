@@ -1,34 +1,34 @@
-#requires GRPH 1.5
+#requires GRPH 1.6
 #import stdio
 // This game was inspired from Color Switch's Circular game mode
 back = (500,500 color[10 10 10])
-shape outline = Circle("Outline" 10,10 480,480 color[128 128 128] 5F rounded {15,20})
+Circle outline = Circle("Outline" 10,10 480,480 color[128 128 128] 5F rounded {15,20})
 validate: outline
 /// The ball we are playing
-shape ball = Polygon("Cursor" RED 470,250 500,240 495,250 500,260)
+Polygon ball = Polygon("Cursor" RED 470,250 500,240 495,250 500,260)
 validate: ball
-shape center = Circle("Center" 240,240 20,20 WHITE)
-shape red = Path(["Red path"] RED)
+Circle center = Circle("Center" 240,240 20,20 WHITE)
+Path red = Path(["Red path"] RED)
 moveTo red: 250,250
 lineTo red: 150,150
 quadTo red: 60,250 150,350
 closePath red:
-shape green = Path(["Green path"] GREEN)
+Path green = Path(["Green path"] GREEN)
 moveTo green: 250,250
 lineTo green: 150,150
 quadTo green: 250,60 350,150
 closePath green:
-shape yellow = Path(["Yellow path"] YELLOW)
+Path yellow = Path(["Yellow path"] YELLOW)
 moveTo yellow: 250,250
 lineTo yellow: 350,350
 quadTo yellow: 250,430 150,350
 closePath yellow:
-shape blue = Path(["Blue path"] BLUE)
+Path blue = Path(["Blue path"] BLUE)
 moveTo blue: 250,250
 lineTo blue: 350,350
 quadTo blue: 430,250 350,150
 closePath blue:
-shape group = Group(red green yellow blue center)
+Group group = Group(red green yellow blue center)
 setRotationCenter group: 250,250
 validate: group
 integer sending = 0

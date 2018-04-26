@@ -1,21 +1,21 @@
-#requires GRPH 1.5
+#requires GRPH 1.6
 #import stdio
 back = (640,480 color[0 128 128])
-shape titlebar = Rectangle("TitleBar" 10,10 620,30 WHITE)
-shape title = Text("Question" 30,30 0 20 BLACK)
-shape cross = Path(BLACK 1F)
+Rectangle titlebar = Rectangle("TitleBar" 10,10 620,30 WHITE)
+Text title = Text("Question" 30,30 0 20 BLACK)
+Path cross = Path(BLACK 1F)
 moveTo cross: 605,15
 lineTo cross: 625,35
 moveTo cross: 625,15
 lineTo cross: 605,35
-shape rootPane = Rectangle("RootPane" 10,40 620,320 color[240 240 240])
-shape text = Text("Do you really want to eat this pizza?" 50,100 0 30 BLACK)
-shape yesButton = Rectangle("YesButton" 510,300 100,40 color[192 192 192])
-shape yesText = Text("Yes" 542,328 0 20 BLACK)
-shape noButton = Rectangle("NoButton" 390,300 100,40 color[192 192 192])
-shape noText = Text("No" 430,328 0 20 BLACK)
-shape noFocus = Rectangle("NoFocus" 392,302 95,35 BLACK 1F cut {1, 1})
-shape dialog = Group("Dialog" titlebar title cross rootPane text yesButton yesText noButton noText noFocus)
+Rectangle rootPane = Rectangle("RootPane" 10,40 620,320 color[240 240 240])
+Text text = Text("Do you really want to eat this pizza?" 50,100 0 30 BLACK)
+Rectangle yesButton = Rectangle("YesButton" 510,300 100,40 color[192 192 192])
+Text yesText = Text("Yes" 542,328 0 20 BLACK)
+Rectangle noButton = Rectangle("NoButton" 390,300 100,40 color[192 192 192])
+Text noText = Text("No" 430,328 0 20 BLACK)
+Rectangle noFocus = Rectangle("NoFocus" 392,302 95,35 BLACK 1F cut {1, 1})
+Group dialog = Group("Dialog" titlebar title cross rootPane text yesButton yesText noButton noText noFocus)
 validate: dialog
 boolean continue = true
 #while continue
