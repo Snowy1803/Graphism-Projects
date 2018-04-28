@@ -5,19 +5,19 @@ color littleBlack = color[0 0 0 0.75]
 shape vertical = Line(320,120 320,360 littleBlack 4F cut)
 shape horizontal = Line(200,240 440,240 littleBlack 4F cut)
 validateAll:
-boolean direction = true
+boolean goRight = true
 boolean jump = true
 #while true
 	#if getXForPos[getPosition[r]] >= 180
-		direction = false
+		goRight = false
 	#elseif getXForPos[getPosition[r]] <= 0
-		direction = true
+		goRight = true
 	#if getYForPos[getPosition[c]] <= 120
 		jump = false
 	#elseif getYForPos[getPosition[c]] >= 150
 		jump = true
 	
-	#if direction
+	#if goRight
 		translate r: 1,0
 		translate c: 1,0
 		translate vertical: 1,0
