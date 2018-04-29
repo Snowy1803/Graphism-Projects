@@ -1,0 +1,31 @@
+#requires GRPH 1.7
+#import strutils
+
+Text t = Text("Enter a text to convert" 50,100 font[20] BLACK)
+validate: t
+Rectangle bBack = Rectangle(100,130 80,30 color[128 128 128])
+Text bText = Text("Cypher" 100,155 font[20] BLACK)
+Group button = Group("Button" bBack bText)
+validate: button
+
+integer KEY = 3
+#while true
+	#while button != getSelectedShape[]
+		wait: 15
+	string str = getName[t]
+	string result = ""
+	integer i = 0
+	#while i < getStringLength[str]
+		integer char = charToInteger[substring[str i]]
+		#if char > 64 && char < 91
+			char += KEY
+			#if char >= 91
+				char -= 26
+		#elseif char > 96 && char < 123
+			char += KEY
+			#if char >= 123
+				char -= 26
+		result = concat[result integerToChar[char]]
+		i += 1
+	setName t: result
+	resetSelectedShape:

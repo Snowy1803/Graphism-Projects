@@ -1,0 +1,13 @@
+#requires GRPH 1.7
+#import imgm
+#import random
+image img = createImage[500 100]
+integer y = 0
+#while y < getImageHeight[img]
+	integer x = 0
+	#while x < getImageWidth[img]
+		fillRect img: createPos[x y] 20,20 color[randomInteger[255] randomInteger[255] randomInteger[255]]
+		x += 20
+	y += 20
+Image screen = Image(0,0 img)
+validate: screen
