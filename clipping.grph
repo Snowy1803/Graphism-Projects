@@ -1,3 +1,4 @@
+#requires GRPH 1.7
 #import stdio
 shape one = Rectangle(70,70 50,50 GREEN)
 shape two = Rectangle(50,50 50,50 RED)
@@ -8,8 +9,8 @@ setPaint intersect: color[255 255 0]
 validateAll:
 
 #while true
-	x = 25 - getXForPos[getMousePos[this]]
-	y = 25 - getYForPos[getMousePos[this]]
+	x = 25 - getXForPos[getMousePos[]]
+	y = 25 - getYForPos[getMousePos[]]
 	setPosition two: createPos[0-x 0-y]
 	wait: 15
  //

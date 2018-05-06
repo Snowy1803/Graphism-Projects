@@ -1,4 +1,4 @@
-#requires GRPH 1.6
+#requires GRPH 1.7
 #import strutils
 #import random
 #import stdio
@@ -7,13 +7,13 @@
 Text input = Text("Hello, I'm being searched and replaced." 30,30 0 20 BLACK)
 validate: input
 #while true
-	integer time = getTimeInMillisSinceLoad[this]
+	integer time = getTimeInMillisSinceLoad[]
 	string subject = getName[input]
 	regexMatchBegin subject: "[aeiou]" regexMatchFlags["i"]
 	#while regexMatchFind[subject]
 		regexMatchReplace subject: substring[shuffleString["aeiou"] 0 1]
 	setName input: regexMatchReplaceResult[subject]
 	regexMatchEnd subject:
-	log[[getTimeInMillisSinceLoad[this] - time]]
+	log[[getTimeInMillisSinceLoad[] - time]]
 	wait: 2000
  //

@@ -1,3 +1,4 @@
+#requires GRPH 1.7
 #import math
 #import random
 #import stdio
@@ -20,13 +21,13 @@ integer time = 0
 #while true
 	// Move ball
 	setPosition ball: currentPos
-	#if getXForPos[getMousePos[this]] < 25 + getXForPos[currentPos]
+	#if getXForPos[getMousePos[]] < 25 + getXForPos[currentPos]
 		translate ball: -1,0
-	#elseif getXForPos[getMousePos[this]] > 25 + getXForPos[currentPos]
+	#elseif getXForPos[getMousePos[]] > 25 + getXForPos[currentPos]
 		translate ball: 1,0
-	#if getYForPos[getMousePos[this]] < 25 + getYForPos[currentPos]
+	#if getYForPos[getMousePos[]] < 25 + getYForPos[currentPos]
 		translate ball: 0,-1
-	#elseif getYForPos[getMousePos[this]] > 25 + getYForPos[currentPos]
+	#elseif getYForPos[getMousePos[]] > 25 + getYForPos[currentPos]
 		translate ball: 0,1
 	currentPos = getPosition[ball]
 	// Corrects position of the ball if outside of the frame
@@ -49,7 +50,7 @@ integer time = 0
 	// Move missiles
 	currentObstacle = minObs
 	#while currentObstacle < obsCount
-		obs = getShapeNamed[this toString["Missile" currentObstacle]]
+		obs = getShapeNamed[toString["Missile" currentObstacle]]
 		translate obs: -1,0
 		#if getXForPos[getPosition[obs]] < 0 - 30
 			unvalidate: obs
@@ -60,7 +61,7 @@ integer time = 0
 			back = (640,480 RED)
 			shape go = Text(["Game over"] 197,100 0 50 WHITE)
 			validate: go
-			string s = toString["You" "survived" [divide[getTimeInMillisSinceLoad[this] 1000]] "seconds"]
+			string s = toString["You" "survived" [divide[getTimeInMillisSinceLoad[] 1000]] "seconds"]
 			shape survTime = Text(s 100,160 0 30 WHITE)
 			setHCentered: survTime
 			validate: survTime
@@ -79,7 +80,7 @@ integer time = 0
 		wave = wave + 1
 		currentObstacle = minObs
 		#while currentObstacle < obsCount
-			obs = getShapeNamed[this toString["Missile" currentObstacle]]
+			obs = getShapeNamed[toString["Missile" currentObstacle]]
 			unvalidate: obs
 			currentObstacle += 1
 		//

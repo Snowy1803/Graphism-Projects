@@ -1,4 +1,4 @@
-#requires GRPH 1.6
+#requires GRPH 1.7
 #import stdio
 back = (640,480 color[0 128 128])
 Rectangle titlebar = Rectangle("TitleBar" 10,10 620,30 WHITE)
@@ -19,17 +19,17 @@ Group dialog = Group("Dialog" titlebar title cross rootPane text yesButton yesTe
 validate: dialog
 boolean continue = true
 #while continue
-	#if getSelectedShape[this] == dialog && getMousePos[this] > 605,15 && getMousePos[this] < 625,35
+	#if getSelectedShape[] == dialog && getMousePos[] > 605,15 && getMousePos[] < 625,35
 		unvalidate: dialog
 		continue = false
 		log["CLOSED selected"]
 		// Do CLOSE action...
-	#if getSelectedShape[this] == dialog && getMousePos[this] > 510,300 && getMousePos[this] < 610,340
+	#if getSelectedShape[] == dialog && getMousePos[] > 510,300 && getMousePos[] < 610,340
 		unvalidate: dialog
 		continue = false
 		log["YES selected"]
 		// Do YES action...
-	#if getSelectedShape[this] == dialog && getMousePos[this] > 390,300 && getMousePos[this] < 490,340
+	#if getSelectedShape[] == dialog && getMousePos[] > 390,300 && getMousePos[] < 490,340
 		unvalidate: dialog
 		continue = false
 		log["NO selected"]

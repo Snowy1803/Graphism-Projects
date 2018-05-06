@@ -1,3 +1,4 @@
+#requires GRPH 1.7
 #import stdio
 #import math
 #import random
@@ -31,7 +32,7 @@ integer currentObstacle = 0
 /// Time before next obstacle spawns
 integer nextObstacle = 1000
 #while true
-	#if isKeyPressedWithKeyCode[this 32] && jumping <= 0
+	#if isKeyPressedWithKeyCode[32] && jumping <= 0
 		jumping = 250
 	#if jumping > 150
 		translate ball: 0,-1
@@ -52,7 +53,7 @@ integer nextObstacle = 1000
 		nextObstacle -= 1
 	currentObstacle = removedObstacles + 1
 	#while currentObstacle <= obsCount
-		obs = getShapeNamed[this toString["Obstacle" currentObstacle]]
+		obs = getShapeNamed[toString["Obstacle" currentObstacle]]
 		translate obs: -1,0
 		#if getXForPos[getPoint[obs 0]] < 0 - 40
 			unvalidate: obs
@@ -63,7 +64,7 @@ integer nextObstacle = 1000
 			back = (640,480 RED)
 			shape go = Text(["Game over"] 197,100 0 50 WHITE)
 			validate: go
-			string s = toString["You" "survived" [divide[getTimeInMillisSinceLoad[this] 1000]] "seconds"]
+			string s = toString["You" "survived" [divide[getTimeInMillisSinceLoad[] 1000]] "seconds"]
 			shape survTime = Text(s 100,160 0 30 WHITE)
 			setHCentered: survTime
 			validate: survTime

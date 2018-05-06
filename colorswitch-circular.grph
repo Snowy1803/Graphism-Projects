@@ -1,4 +1,4 @@
-#requires GRPH 1.6
+#requires GRPH 1.7
 #import stdio
 // This game was inspired from Color Switch's Circular game mode
 back = (500,500 color[10 10 10])
@@ -35,13 +35,13 @@ integer sending = 0
 integer progress = 0
 #while true
 	rotate group: 5°
-	#if isKeyPressedWithKeyCode[this 32] && sending == 0
+	#if isKeyPressedWithKeyCode[32] && sending == 0
 		sending = 1
 		translate ball: -1,0
 	#if sending >= 1
 		sending += 5
 		translate ball: -5,0
-		#if intersectsGrouped[this ball red] && progress <= 0
+		#if intersectsGrouped[ball red] && progress <= 0
 			#if getPaint[ball] == RED
 				translate ball: createPos[sending 0]
 				sending = 0
@@ -52,7 +52,7 @@ integer progress = 0
 				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
 				end:
 			//
-		#elseif intersectsGrouped[this ball green] && progress <= 1
+		#elseif intersectsGrouped[ball green] && progress <= 1
 			#if getPaint[ball] == GREEN
 				translate ball: createPos[sending 0]
 				sending = 0
@@ -63,7 +63,7 @@ integer progress = 0
 				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
 				end:
 			//
-		#elseif intersectsGrouped[this ball blue] && progress <= 2
+		#elseif intersectsGrouped[ball blue] && progress <= 2
 			#if getPaint[ball] == BLUE
 				translate ball: createPos[sending 0]
 				sending = 0
@@ -74,7 +74,7 @@ integer progress = 0
 				validate: Text(["You touched the wrong color!"] 58,300 0 30 WHITE)
 				end:
 			//
-		#elseif intersectsGrouped[this ball yellow] && progress <= 3
+		#elseif intersectsGrouped[ball yellow] && progress <= 3
 			#if getPaint[ball] == YELLOW
 				translate ball: createPos[sending 0]
 				sending = 0 
