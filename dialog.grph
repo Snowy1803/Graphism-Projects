@@ -19,21 +19,22 @@ Group dialog = Group("Dialog" titlebar title cross rootPane text yesButton yesTe
 validate: dialog
 boolean continue = true
 #while continue
-	#if getSelectedShape[] == dialog && getMousePos[] > 605,15 && getMousePos[] < 625,35
-		unvalidate: dialog
-		continue = false
-		log["CLOSED selected"]
-		// Do CLOSE action...
-	#if getSelectedShape[] == dialog && getMousePos[] > 510,300 && getMousePos[] < 610,340
-		unvalidate: dialog
-		continue = false
-		log["YES selected"]
-		// Do YES action...
-	#if getSelectedShape[] == dialog && getMousePos[] > 390,300 && getMousePos[] < 490,340
-		unvalidate: dialog
-		continue = false
-		log["NO selected"]
-		// Do NO action...
+	#if getSelectedShape[] == dialog
+		#if getMousePos[] > 605,15 && getMousePos[] < 625,35
+			unvalidate: dialog
+			continue = false
+			log["CLOSED selected"]
+			// Do CLOSE action...
+		#elseif getMousePos[] > 510,300 && getMousePos[] < 610,340
+			unvalidate: dialog
+			continue = false
+			log["YES selected"]
+			// Do YES action...
+		#elseif  getMousePos[] > 390,300 && getMousePos[] < 490,340
+			unvalidate: dialog
+			continue = false
+			log["NO selected"]
+			// Do NO action...
 	resetSelectedShape:
 	wait: 500
  //
