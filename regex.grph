@@ -3,7 +3,7 @@
 #import random
 #import stdio
 /// This shape's text will change every two seconds.
-/// It's vowels will be replaced by other vowels randomly choosen.
+/// It's vowels will be replaced by other vowels randomly chosen.
 Text input = Text("Hello, I'm being searched and replaced." 30,30 0 20 BLACK)
 validate: input
 #while true
