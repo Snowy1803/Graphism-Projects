@@ -14,7 +14,7 @@ Rectangle yesButton = Rectangle("YesButton" 510,300 100,40 color[192 192 192])
 Text yesText = Text("Yes" 542,328 0 20 BLACK)
 Rectangle noButton = Rectangle("NoButton" 390,300 100,40 color[192 192 192])
 Text noText = Text("No" 430,328 0 20 BLACK)
-Rectangle noFocus = Rectangle("NoFocus" 392,302 95,35 BLACK 1F cut {1, 1})
+Rectangle noFocus = Rectangle("NoFocus" 392,302 95,35 BLACK 1F cut {1F, 1F})
 Group dialog = Group("Dialog" titlebar title cross rootPane text yesButton yesText noButton noText noFocus)
 validate: dialog
 boolean continue = true

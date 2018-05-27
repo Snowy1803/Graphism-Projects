@@ -1,0 +1,8 @@
+#requires GRPH 1.8
+#import reflect
+castTo["string" "str"]
+castTo["paint" BLUE]
+castTo["paint|string" "str"]
+castTo["rotation|float" 5] // Returns 5°
+castTo["rotation|float" 5F] // Returns 5F
+castTo["rotation|float|integer|float" 5] // Returns 5

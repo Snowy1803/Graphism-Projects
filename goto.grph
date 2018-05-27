@@ -1,8 +1,11 @@
+#requires GRPH 1.8
 // GOTO test
 #if false
+	::FIRST
 	log["Something impossible happened!"]
-	#goto 6
+	#goto ::SECOND
 	#if false
+		::SECOND
 		log["Unless #goto was used."]
 #else
-	#goto 3
+	#goto ::FIRST

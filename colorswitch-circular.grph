@@ -2,7 +2,7 @@
 #import stdio
 // This game was inspired from Color Switch's Circular game mode
 back = (500,500 color[10 10 10])
-Circle outline = Circle("Outline" 10,10 480,480 color[128 128 128] 5F rounded {15,20})
+Circle outline = Circle("Outline" 10,10 480,480 color[128 128 128] 5F rounded {15F, 20F})
 validate: outline
 /// The ball we are playing
 Polygon ball = Polygon("Cursor" RED 470,250 500,240 495,250 500,260)

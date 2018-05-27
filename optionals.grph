@@ -1,0 +1,7 @@
+#requires GRPH 1.8
+string? s1 = "s" // Autoboxing
+string s2 = s1 // Unboxing
+string?? s3 = "s" // Autoboxing + Autoboxing
+string s4 = s3 // Unboxing + Unboxing
+string? s5 = null
+string s6 = s5 // Unboxing + Error

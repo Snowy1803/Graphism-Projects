@@ -1,0 +1,11 @@
+#requires GRPH 1.8
+
+/// The array
+{string} cmps = string {"Zero", "One", "Two", "Three", "Four"}
+cmps{+} = "Six" // Adds "Six" to the end
+cmps{0-} = // Removes index 0 ("Zero")
+cmps{4+} = "Five" // Adds "Five" at index 4
+
+/// The component
+#foreach cmp : cmps
+	log[cmp]
