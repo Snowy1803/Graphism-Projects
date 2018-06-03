@@ -1,0 +1,75 @@
+#requires GRPH 1.9
+#import stdio
+#import reflect>requiresPermission
+
+requiresPermission: "file-list"
+
+{file} history = file {''}
+integer historyIndex = 0
+integer historyLast = 0
+
+Polygon parent = Polygon("Parent Directory" color[128 128 128] 8,0 16,4 10,4 10,16 6,16 6,4 0,4)
+Polygon previous = cloneShape[parent] as Polygon
+translate previous: 20,0
+setRotationCenter previous: 28,8
+rotate previous: 270°
+setName previous: "Previous"
+Polygon next = cloneShape[parent] as Polygon
+translate next: 40,0
+setRotationCenter next: 48,8
+rotate next: 90°
+setName next: "Next"
+Text at = Text(toString[history{historyIndex}] 60,20 font[20] BLACK)
+validateAll:
+
+{shape} groups = shape {}
+
+#while true
+	boolean changed = getArrayLength[groups] == 0
+	#if getSelectedShape[] == parent
+		file? new = getParentFile[history{historyIndex}]
+		#if new != null
+			historyIndex += 1
+			history{historyIndex+} = new
+			historyLast = historyIndex
+			changed = true
+	#elseif getSelectedShape[] == previous
+		#if historyIndex > 0
+			historyIndex -= 1
+			changed = true
+		#else
+			resetSelectedShape:
+	
+	#elseif getSelectedShape[] == next
+		#if historyIndex < historyLast
+			historyIndex += 1
+			changed = true
+		#else
+			resetSelectedShape:
+	
+	#elseif getSelectedShape[] is Text && getSelectedShape[] != at
+		file f = concat[history{historyIndex} "/" getName[getSelectedShape[]]] as file
+		#if isDirectory[f]
+			historyIndex += 1
+			history{historyIndex+} = getAbsoluteFile[f]
+			historyLast = historyIndex
+			changed = true
+	#if changed
+		setName at: toString[history{historyIndex}]
+		resetSelectedShape:
+		#while getArrayLength[groups] > 0
+			unvalidate: groups{0}
+			groups{0-} = 
+		integer y = 50
+		#foreach f : listFiles[history{historyIndex}]
+			Text group = Text(getFileName[f] createPos[10 y] font[15] BLACK)
+			groups{+} = group
+			validate: group
+			y += 20
+		#else
+			Text group = Text("Empty directory" createPos[50 y] font[20] BLACK)
+			setHCentered: group
+			groups{+} = group
+			validate: group
+	wait: 100
+//
