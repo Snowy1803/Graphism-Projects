@@ -1,13 +1,18 @@
-#requires GRPH 1.7
+#requires GRPH 1.10
 #import imgm
 #import random
+
+/// Generates a random color.
+/// @see randomInteger
+color randomColor[] = color[randomInteger[256] randomInteger[256] randomInteger[256]]
+
 image img = createImage[500 100]
 integer y = 0
-#while y < getImageHeight[img]
+#while y < img.height
 	integer x = 0
-	#while x < getImageWidth[img]
-		fillRect img: createPos[x y] 20,20 color[randomInteger[255] randomInteger[255] randomInteger[255]]
+	#while x < img.width
+		fillRect img: createPos[x y] 20,20 randomColor[]
 		x += 20
 	y += 20
-Image screen = Image(0,0 img)
+Image screen = (0,0 img)
 validate: screen

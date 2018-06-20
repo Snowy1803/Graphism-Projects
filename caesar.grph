@@ -1,31 +1,37 @@
-#requires GRPH 1.7
+#requires GRPH 1.10
 #import strutils
 
-Text t = Text("Enter a text to convert" 50,100 font[20] BLACK)
+final integer KEY = 3
+
+/// Encrypts the given character using the KEY constant and the given range.
+/// @param char The character, as a codepoint
+/// @param min The lowest codepoint to encrypt
+/// @param max The highest codepoint to encrypt, or min + 27 by default
+#function integer encryptLetter[integer char, integer min, integer max = min + 27]
+	#if char > min && char < max
+		char += KEY
+		#if char >= max
+			char -= 26
+	#return char
+
+Text t = Text("Enter a text to convert" 50,100 font[20] color.BLACK)
 validate: t
 Rectangle bBack = Rectangle(100,130 80,30 color[128 128 128])
-Text bText = Text("Cypher" 100,155 font[20] BLACK)
+Text bText = Text("Cypher" 110,155 font[20] color.WHITE)
 Group button = Group("Button" bBack bText)
 validate: button
 
-integer KEY = 3
 #while true
 	#while button != getSelectedShape[]
 		wait: 15
-	string str = getName[t]
+	string str = t.name
 	string result = ""
 	integer i = 0
-	#while i < getStringLength[str]
+	#while i < str.length
 		integer char = charToInteger[substring[str i]]
-		#if char > 64 && char < 91
-			char += KEY
-			#if char >= 91
-				char -= 26
-		#elseif char > 96 && char < 123
-			char += KEY
-			#if char >= 123
-				char -= 26
-		result = concat[result integerToChar[char]]
+		char = encryptLetter[char 64]
+		char = encryptLetter[char 96]
+		result = result + integerToChar[char]
 		i += 1
-	setName t: result
+	t.name = result
 	resetSelectedShape:
